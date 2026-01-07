@@ -1,4 +1,6 @@
-# Tylax
+<div align="center">
+  <img src="assets/logo.svg" alt="Tylax Logo" width="160" />
+</div>
 
 [![Crates.io](https://img.shields.io/crates/v/tylax.svg)](https://crates.io/crates/tylax)
 [![Documentation](https://docs.rs/tylax/badge.svg)](https://docs.rs/tylax)
@@ -571,6 +573,16 @@ cargo test -- --nocapture
 | 集成测试 | 完整文档转换、自动检测、双向转换 | ✅ |
 
 ---
+
+## 社区
+
+欢迎加入讨论！
+
+<div align="center">
+  <a href="https://discord.gg/veKAFnDqsw" target="_blank"><img src="https://img.shields.io/badge/Discord-%E5%8A%A0%E5%85%A5%E6%9C%8D%E5%8A%A1%E5%99%A8-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord"></a>
+  &nbsp;
+  <a href="https://qun.qq.com/universal-share/share?ac=1&authKey=3CYnFQ6qWEpRzP335ZvGXL7Hli1zMu5so7KKU41Hx8syPYxGJ8MiSA9nzBpBOAK0&busi_data=eyJncm91cENvZGUiOiIxMDU3MDc4ODEwIiwidG9rZW4iOiJpb3V0b0Z4QmQzdWdlUm9DUFRvcXFtT1VqblRFcmZzV1FLZXFqcktVeUJVemJobGZONlhoQ1dxU1NXN3J5NGNrIiwidWluIjoiMTMyNjYyNzY3NyJ9&data=jiifC7VOCQf-Ta1N2Y4K1Hzq4go_jsOBTcmA9vWKDZpe6nOubOeFASLyo2qwy1z_uJK1zi0QbjZAAnVgO8Ldjg&svctype=4&tempid=h5_group_info" target="_blank"><img src="https://img.shields.io/badge/QQ%E7%BE%A4-1057078810-0099FF?style=for-the-badge&logo=tencent-qq&logoColor=white" alt="QQ Group"></a>
+</div>
 
 ## 贡献
 
