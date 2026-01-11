@@ -397,7 +397,7 @@ fn format_typst_output(input: &str) -> String {
 #[wasm_bindgen(js_name = "previewTable")]
 pub fn preview_table_wasm(input: &str, format: &str) -> JsValue {
     use crate::features::tables::{parse_latex_table, parse_typst_table};
-    
+
     let result = match format {
         "latex" => {
             if let Some(table) = parse_latex_table(input) {
@@ -405,7 +405,8 @@ pub fn preview_table_wasm(input: &str, format: &str) -> JsValue {
             } else {
                 return serde_wasm_bindgen::to_value(&TablePreviewError {
                     error: "Failed to parse LaTeX table".to_string(),
-                }).unwrap()
+                })
+                .unwrap();
             }
         }
         "typst" => {
@@ -414,16 +415,18 @@ pub fn preview_table_wasm(input: &str, format: &str) -> JsValue {
             } else {
                 return serde_wasm_bindgen::to_value(&TablePreviewError {
                     error: "Failed to parse Typst table".to_string(),
-                }).unwrap()
+                })
+                .unwrap();
             }
         }
         _ => {
             return serde_wasm_bindgen::to_value(&TablePreviewError {
                 error: format!("Unknown format: {}", format),
-            }).unwrap()
+            })
+            .unwrap()
         }
     };
-    
+
     serde_wasm_bindgen::to_value(&result).unwrap()
 }
 
@@ -439,30 +442,32 @@ pub struct TablePreviewError {
 fn table_to_preview_data(table: &crate::features::tables::Table) -> TablePreviewData {
     let mut rows = Vec::new();
     let has_header = !table.header.is_empty();
-    
+
     // Convert header rows
     for row in &table.header {
         let preview_row = row_to_preview_row(row, true);
         rows.push(preview_row);
     }
-    
+
     // Convert body rows
     for row in &table.body {
         let preview_row = row_to_preview_row(row, false);
         rows.push(preview_row);
     }
-    
+
     // Convert footer rows
     for row in &table.footer {
         let preview_row = row_to_preview_row(row, false);
         rows.push(preview_row);
     }
-    
+
     // Convert column alignments
-    let default_alignments: Vec<PreviewCellAlign> = table.colspecs.iter()
+    let default_alignments: Vec<PreviewCellAlign> = table
+        .colspecs
+        .iter()
         .map(|spec| alignment_to_preview(&spec.alignment))
         .collect();
-    
+
     TablePreviewData {
         rows,
         has_header,
@@ -474,10 +479,12 @@ fn table_to_preview_data(table: &crate::features::tables::Table) -> TablePreview
 /// Convert a Row to PreviewRow
 #[cfg(feature = "wasm")]
 fn row_to_preview_row(row: &crate::features::tables::Row, is_header: bool) -> PreviewRow {
-    let cells: Vec<PreviewCell> = row.cells.iter()
+    let cells: Vec<PreviewCell> = row
+        .cells
+        .iter()
         .map(|cell| cell_to_preview_cell(cell, is_header))
         .collect();
-    
+
     PreviewRow {
         cells,
         has_bottom_border: row.has_bottom_border,
@@ -491,7 +498,10 @@ fn cell_to_preview_cell(cell: &crate::features::tables::Cell, is_header: bool) -
         content: cell.content.clone(),
         colspan: cell.colspan as usize,
         rowspan: cell.rowspan as usize,
-        align: cell.alignment.map(|a| alignment_to_preview(&a)).unwrap_or_default(),
+        align: cell
+            .alignment
+            .map(|a| alignment_to_preview(&a))
+            .unwrap_or_default(),
         is_header,
     }
 }
@@ -500,7 +510,7 @@ fn cell_to_preview_cell(cell: &crate::features::tables::Cell, is_header: bool) -
 #[cfg(feature = "wasm")]
 fn alignment_to_preview(align: &crate::features::tables::Alignment) -> PreviewCellAlign {
     use crate::features::tables::Alignment;
-    
+
     match align {
         Alignment::Left | Alignment::Default => PreviewCellAlign::Left,
         Alignment::Center => PreviewCellAlign::Center,
