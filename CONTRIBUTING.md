@@ -44,6 +44,34 @@ cargo test typst2latex
 cargo test tikz
 ```
 
+## Architecture
+
+This project uses **AST-based parsing** for high-precision bidirectional conversion:
+
+- **LaTeX parsing**: [MiTeX](https://github.com/mitex-rs/mitex) - High-performance LaTeX parser with Rowan AST
+- **Typst parsing**: [typst-syntax](https://github.com/typst/typst) - Official Typst syntax parser
+
+### Module Structure
+
+```
+src/
+├── core/
+│   ├── latex2typst/     # LaTeX → Typst conversion
+│   │   ├── context.rs   # Conversion state & options
+│   │   ├── markup.rs    # Document structure
+│   │   └── table/       # Smart table parser with coverage tracking
+│   └── typst2latex/     # Typst → LaTeX conversion
+├── features/
+│   ├── tikz.rs          # TikZ ↔ CeTZ with 5 coordinate systems
+│   ├── macros.rs        # Depth-limited macro expansion
+│   └── refs.rs          # Citations & references
+├── data/
+│   ├── maps.rs          # Symbol mappings
+│   └── symbols.rs       # Greek, operators, arrows
+└── bin/
+    └── t2l.rs           # CLI application
+```
+
 ## Code Style
 
 - Run `cargo fmt` before committing
